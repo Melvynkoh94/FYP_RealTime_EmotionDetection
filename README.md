@@ -9,6 +9,14 @@
   </a>
 </p>
 
+**SUMMARY:**
+To achieve a satisfactory result within the stipulated time-frame, the scope of this project is to classify six categories of emotions – **anger, fear, happy, sad, surprise** and **neutral**. The system classifies each image frame from the video into discrete emotion categories. The software application is written in Python programming language with OpenCV for processing images and videos. CNN-based approach is done with Google’s Tensorflow machine-learning library to construct the trained model. Lastly, Keras is used as the high-level neural networks API (application programming interface) that runs on top of Tensorflow. The model is trained and evaluated on the FER2013 dataset.
+
+**TO START THE APP:**
+1)	python emotion_detection_tk.py
+2)  Choose 1 of the 2 options in the pop-up window to detect emotions
+3)  To stop or exit the real-time detection, press 'q' on your keyboard
+
 **Installed libraries:**
   - Tensorflow  (pip install tensorflow)
   - Keras (pip install keras)
@@ -29,13 +37,10 @@
   - C:\Users\User\Documents\GitHub\FYP_RealTime_EmotionDetection\python
 
 **Path where frames captured are stored:**
-  - C:\Users\User\Documents\GitHub\FYP_RealTime_EmotionDetection\python\frames_captured_20181013-152354
+  - e.g. C:\Users\User\Documents\GitHub\FYP_RealTime_EmotionDetection\python\frames_captured_20181013-152354
+  - A new folder is created in every launch of the real-time detection
   ![alt text](frames_captured_1.JPG)
 
-**TO START THE APP:**
-1)	python emotion_detection_tk.py
-2)  Choose 1 of the 2 options to detect emotions
-3)  To stop or exit the real-time detection, press 'q'
 
 **External Resources**
   - Create user-friendly GUI with Tkinter --> https://likegeeks.com/python-gui-examples-tkinter-tutorial/
