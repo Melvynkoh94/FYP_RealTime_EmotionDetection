@@ -12,7 +12,10 @@
 ### SUMMARY:
 To achieve a satisfactory result within the stipulated time-frame, the scope of this project is to classify six categories of emotions – **Angry, Disgust, Fear, Happy, Sad, Surprise** and **Neutral**. The system classifies each image frame from the video stream into discrete emotion categories. The software application is written in Python programming language with OpenCV for processing images and videos. CNN-based approach is done with Google’s Tensorflow machine-learning library to construct the trained model. Lastly, Keras is used as the high-level neural networks API (application programming interface) that runs on top of Tensorflow. The model is trained and evaluated on the FER2013 dataset.
 
-**TO START THE APP**
+### TO START THE APP
+
+The mainscript is **emotion_detection_tk.py : 
+
 1)	python emotion_detection_tk.py
 2)  Choose 1 of the 2 options in the pop-up window to detect emotions
 3)  To stop or exit the real-time detection, press 'q' on your keyboard
