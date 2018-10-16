@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-# DEMO (Click to watch):
+**DEMO (Click to watch):**
 <p align="center">
   <a href="https://www.youtube.com/watch?v=WcNR0HR1d-w&t=17s" target="_new">
     <img src="Screenshot_surprise.png">
