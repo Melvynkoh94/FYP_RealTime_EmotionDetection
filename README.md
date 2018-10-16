@@ -34,6 +34,7 @@
 **TO START THE APP:**
 1)	python emotion_detection_tk.py
 2)  Choose 1 of the 2 options to detect emotions
+3)  To stop or exit the real-time detection, press 'q'
 
 **External Resources**
   - Create user-friendly GUI with Tkinter --> https://likegeeks.com/python-gui-examples-tkinter-tutorial/
