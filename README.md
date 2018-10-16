@@ -30,6 +30,7 @@
 
 **Path where frames captured are stored:**
   - C:\Users\User\Documents\GitHub\FYP_RealTime_EmotionDetection\python\frames_captured_20181013-152354
+  ![alt text](frames_captured_1.JPG)
 
 **TO START THE APP:**
 1)	python emotion_detection_tk.py
