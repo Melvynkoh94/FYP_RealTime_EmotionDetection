@@ -17,7 +17,7 @@ To achieve a satisfactory result within the stipulated time-frame, the scope of 
 2)  Choose 1 of the 2 options in the pop-up window to detect emotions
 3)  To stop or exit the real-time detection, press 'q' on your keyboard
 
-**Installed libraries**
+### Installed libraries
 
 Make sure these libraries are installed before running the emotion_detection_tk.py script:
   - Tensorflow  (pip install tensorflow)
@@ -26,12 +26,12 @@ Make sure these libraries are installed before running the emotion_detection_tk.
   - Tkinter
   - Pillow  (pip install Pillow)
 
-**Dependencies:**
+### Dependencies
   - emotion_detection_model.json created to be run on-the-fly with the app
   - emotion_detection_weights.h5 defines the weights for the model between neurons
   - haarcascade_frontalface_default.xml is the face classifier for face detection
 
-**Dataset:**
+### Dataset
  - FER2013 dataset cannot be uploaded to GitHub due to the size limit
  - Download the FER2013 in Kaggle --> https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
 
