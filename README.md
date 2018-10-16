@@ -14,7 +14,7 @@ To achieve a satisfactory result within the stipulated time-frame, the scope of 
 
 ### TO START THE APP
 
-The mainscript is **emotion_detection_tk.py : 
+The mainscript is **emotion_detection_tk.py** : 
 
 1)	cd to the path where emotion_detection_tk.py resides, and run it
 ```sh
