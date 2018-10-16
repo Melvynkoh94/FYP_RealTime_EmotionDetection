@@ -16,7 +16,10 @@ To achieve a satisfactory result within the stipulated time-frame, the scope of 
 
 The mainscript is **emotion_detection_tk.py : 
 
-1)	python emotion_detection_tk.py
+1)	cd to the path where emotion_detection_tk.py resides, and run it
+```sh
+$ python emotion_detection_tk.py
+```
 2)  Choose 1 of the 2 options in the pop-up window to detect emotions
 3)  To stop or exit the real-time detection, press 'q' on your keyboard
 
