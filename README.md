@@ -18,6 +18,7 @@ To achieve a satisfactory result within the stipulated time-frame, the scope of 
 3)  To stop or exit the real-time detection, press 'q' on your keyboard
 
 **Installed libraries**
+
 Make sure these libraries are installed before running the emotion_detection_tk.py script:
   - Tensorflow  (pip install tensorflow)
   - Keras (pip install keras)
