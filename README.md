@@ -22,7 +22,7 @@
   - haarcascade_frontalface_default.xml is the face classifier for face detection
 
 **Dataset:**
- - FER2013 dataset cannot be uploaded to Github due to the size limit
+ - FER2013 dataset cannot be uploaded to GitHub due to the size limit
  - Download the FER2013 in Kaggle --> https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
 
 **Path where main script (emotion_detection_tk.py) resides:**
