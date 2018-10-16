@@ -9,7 +9,7 @@
   </a>
 </p>
 
-##SUMMARY:
+###SUMMARY:
 To achieve a satisfactory result within the stipulated time-frame, the scope of this project is to classify six categories of emotions – **anger, fear, happy, sad, surprise** and **neutral**. The system classifies each image frame from the video into discrete emotion categories. The software application is written in Python programming language with OpenCV for processing images and videos. CNN-based approach is done with Google’s Tensorflow machine-learning library to construct the trained model. Lastly, Keras is used as the high-level neural networks API (application programming interface) that runs on top of Tensorflow. The model is trained and evaluated on the FER2013 dataset.
 
 **TO START THE APP:**
