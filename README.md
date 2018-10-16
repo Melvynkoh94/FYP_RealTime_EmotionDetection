@@ -27,6 +27,7 @@ Make sure these libraries are installed before running the emotion_detection_tk.
   - Pillow  (pip install Pillow)
 
 ### Dependencies
+ ![alt text](dependencies.JPG)
   - emotion_detection_model.json created to be run on-the-fly with the app
   - emotion_detection_weights.h5 defines the weights for the model between neurons
   - haarcascade_frontalface_default.xml is the face classifier for face detection
