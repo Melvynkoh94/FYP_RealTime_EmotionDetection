@@ -10,17 +10,19 @@ import tkinter as tk #GUI package
 import tkinter.filedialog
 from tkinter import *
 import matplotlib.pyplot as plt
+import glob
 
 from PIL import Image
 from PIL import ImageTk
 
+
 emotions_probList = [None]*7
 #-----------------------------
 #initializations
-face_cascade = cv2.CascadeClassifier('./dependencies/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('C:/Users/User/Anaconda3/envs/tensorflow/Library/etc/haarcascades/haarcascade_frontalface_default.xml')
 ip_cam_url = "http://192.168.43.1:8080/shot.jpg"	#for instructions on IP CAM--> https://www.youtube.com/watch?v=2xcUzXataIk&t=561s
-model = model_from_json(open("./dependencies/emotion_detection_model.json", "r").read())	#json format for keras is just the architecture strucutre of the model 
-model.load_weights('./dependencies/emotion_detection_weights.h5') #load weights
+model = model_from_json(open("model/facial_expression_model_structure.json", "r").read())	#json format for keras is just the architecture strucutre of the model 
+model.load_weights('model/facial_expression_model_weights.h5') #load weights
 #HDF5 or h5py is the file type that contains a model/weights in keras
 emotions = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
 #-----------------------------
@@ -58,6 +60,7 @@ def select_image():
 			#store probabilities of 7 expressions
 			predictions = model.predict(img_pixels)
 
+			######################################3
 			#find max indexed array 0: angry, 1:disgust, 2:fear, 3:happy, 4:sad, 5:surprise, 6:neutral
 			max_index = np.argmax(predictions[0])	#returns the index of the max value
 			max_prob = np.max(predictions[0])
@@ -86,6 +89,7 @@ def select_image():
 			final_image = cv2.putText(image, emotion_captured, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (50,255,0), 2)	#green text at the top 
 			final_image = cv2.putText(image, emotion_prob, (int(x), int(y+h+20)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (50, 255,0), 2)	#green text at the bottom
 			#final_image = cv2.putText(image, emotion_captured, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
+			#########################
 			cv2.imshow('Static Image Emotion Detection', final_image)
 
 			#In order to display our images in the Tkinter GUI, we first need to change the formatting. 
@@ -107,6 +111,96 @@ def select_image():
 			panelA.configure(image=final_image)
 			panelA.image = final_image"""
 #-----------------------------
+
+
+#-----------------------------
+#For static Image for Emotion Detection
+def select_experiment():
+	cwd = os.getcwd()
+	time_now = datetime.now().strftime("%Y%m%d-%H%M%S")
+	new_folder = "test_results_{0}".format(time_now)
+	new_folder_dir = "{0}\{1}\{2}".format(cwd, 'python', new_folder)
+	createFolder(new_folder, new_folder_dir)
+
+	emotions_detected = [0, 0, 0, 0, 0, 0, 0]
+
+	folder = r'C:\Users\User\Documents\GitHub\Facial-Expression-Detection\ck_images\fear'
+	data_path = os.path.join(folder, '*.png')
+	files = glob.glob(data_path)
+	images = []
+	j=0
+	for file in files:
+		image = cv2.imread(file)
+		image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+		faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
+		faces_array = np.array(faces)	#cast the tuple type to array type to get the shape later on 
+		num_faces = faces_array.shape[0]
+		print('Number of faces: ',num_faces)
+		#locations of detected faces
+		for (x,y,w,h) in faces:
+			cv2.rectangle(image, (x,y), (x+w, y+h), (255,0,0),2) #draw rectangle to main image
+			detected_face = image[int(y):int(y+h), int(x):int(x+w)] #crop detected face
+			detected_face = cv2.cvtColor(detected_face, cv2.COLOR_BGR2GRAY) #transform to gray scale
+			detected_face_mini = cv2.resize(detected_face, (48, 48)) #resize to 48x48
+			img_pixels = kerasimage.img_to_array(detected_face_mini)
+			img_pixels = np.expand_dims(img_pixels, axis = 0)
+			img_pixels /= 255 #pixels are in scale of [0, 255]. normalize all pixels in scale of [0, 1]
+
+			#store probabilities of 7 expressions
+			predictions = model.predict(img_pixels)
+
+			######################################3
+			#find max indexed array 0: angry, 1:disgust, 2:fear, 3:happy, 4:sad, 5:surprise, 6:neutral
+			max_index = np.argmax(predictions[0])	#returns the index of the max value
+			max_prob = np.max(predictions[0])
+
+			#update emotions detected list
+			emotions_detected[max_index] +=1
+
+			#probabilities of each expression
+			angry_prob = predictions[0][0]
+			disgust_prob = predictions[0][1]
+			fear_prob = predictions[0][2]
+			happy_prob = predictions[0][3]
+			sad_prob = predictions[0][4]
+			surprise_prob = predictions[0][5]
+			neutral_prob = predictions[0][6]
+			i=0
+			for i in range(7):
+				emotions_probList[i] = predictions[0][i]			
+			set_label(emotions_probList, num_faces)
+
+			#this is the emotion distinguished by the model
+			#emotion_captured = emotions[max_index] + ' '+ str(max_prob)
+			emotion_captured = emotions[max_index]
+			emotion_prob = str(max_prob)
+
+			#write emotion text above rectangle
+			#WHITE TEXT (255,255,255)
+			#final_image = cv2.putText(image, emotion_captured, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+			final_image = cv2.putText(image, emotion_captured, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (50,255,0), 2)	#green text at the top 
+			final_image = cv2.putText(image, emotion_prob, (int(x), int(y+h+20)), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (50, 255,0), 2)	#green text at the bottom
+
+			#saving images into a new folder
+			j+=1
+			FaceFileName = "./python/{0}/frame_{1}_{2}_{3}.jpg".format(new_folder, j, emotion_captured, emotion_prob)
+			cv2.imwrite(FaceFileName, detected_face)
+			#process on detected face end
+			#-------------------------
+	
+	print('Emotions Detected: ', emotions_detected)
+	for k in range(len(emotions_detected)):
+		print(emotions[k], ':', emotions_detected[k])
+	print('Total: ',j)
+
+#-----------------------------
+def load_images_from_folder(folder):
+	images = []
+	for filename in os.listdir(folder):
+			img = cv2.imread(os.path.join(folder,filename))
+			if img is not None:
+					images.append(img)
+	return images
 
 
 #-----------------------------
@@ -253,6 +347,10 @@ button2.grid(column=1, row=1)
 button3 = tk.Button(window, text="Clear Values", command=clearValues)
 button3.grid(column=0, row=2)
 
+#BUTTON 4
+button4 = tk.Button(window, text="Experimentation", command=select_experiment)
+button4.grid(column=1, row=2 )
+
 
 #0: angry, 1:disgust, 2:fear, 3:happy, 4:sad, 5:surprise, 6:neutral
 #EXPRESSIONS PROBABILITIES (1st column)
@@ -283,4 +381,4 @@ labelNumFaces = tk.Label(window, text="No. of Faces: ", font="Helvetica 10 bold"
 labelNumFaces.grid(column=1, row=6, sticky=W)
 
 #set_label(emotions_probList)
-window.mainloop() #mainloop() must always be at the bottom
+window.mainloop() #THIS MUST ALWAYS BE AT THE BOTTOM!!
