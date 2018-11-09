@@ -20,7 +20,7 @@ emotions_probList = [None]*7
 #-----------------------------
 #initializations
 face_cascade = cv2.CascadeClassifier('C:/Users/User/Anaconda3/envs/tensorflow/Library/etc/haarcascades/haarcascade_frontalface_default.xml')
-ip_cam_url = "http://192.168.43.1:8080/shot.jpg"	#for instructions on IP CAM--> https://www.youtube.com/watch?v=2xcUzXataIk&t=561s
+ip_cam_url = "http://192.168.86.26:8080/shot.jpg"	#for instructions on IP CAM--> https://www.youtube.com/watch?v=2xcUzXataIk&t=561s
 model = model_from_json(open("dependencies/emotion_detection_model.json", "r").read())	#json format for keras is just the architecture strucutre of the model 
 model.load_weights('dependencies/emotion_detection_weights.h5') #load weights
 #HDF5 or h5py is the file type that contains a model/weights in keras
@@ -207,8 +207,8 @@ def load_images_from_folder(folder):
 #For VideoStream/Live Stream or Emotion Detection
 def select_vs():
 	num_faces = 0
-	cap = cv2.VideoCapture(0) #real-time streaming using webcam
-	#cap = cv2.VideoCapture(ip_cam_url)
+	#cap = cv2.VideoCapture(0) #real-time streaming using webcam
+	cap = cv2.VideoCapture(ip_cam_url)
 	cwd = os.getcwd()
 	time_now = datetime.now().strftime("%Y%m%d-%H%M%S")
 	new_folder = "frames_captured_{0}".format(time_now)
@@ -218,7 +218,7 @@ def select_vs():
 	#counter for filename later for faces captured in each frame 
 	j = 0 
 	while(True):
-		#cap = cv2.VideoCapture(ip_cam_url)
+		cap = cv2.VideoCapture(ip_cam_url)
 		ret, img = cap.read()
 		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 		faces = face_cascade.detectMultiScale(gray, 1.3, 5)
