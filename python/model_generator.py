@@ -20,7 +20,7 @@ keras.backend.set_session(sess)
 #variables
 num_classes = 7 #angry, disgust, fear, happy, sad, surprise, neutral
 batch_size = 256
-epochs = 5
+epochs = 20
 #------------------------------
 #using FER2013 datasets from Kaggle competition 
 #with open('/dataset/fer2013/fer2013.csv') as f:
@@ -117,14 +117,10 @@ model.compile(loss='categorical_crossentropy'
     , metrics=['accuracy']
 )
 
-
 #SAVING MY TRAINED MODEL
 #------------------------------
 fit = True
-
 if fit == True:
-    #To complete the training in less time, I prefer to implement learning with randomly selected trainset instances. 
-    #That is the reason why train and fit generator used
 	#model.fit_generator(x_train, y_train, epochs=epochs) #train for all trainset
 	model.fit_generator(train_generator, steps_per_epoch=batch_size, epochs=epochs) #train for randomly selected one
 else:
@@ -182,7 +178,7 @@ if monitor_testset_results == True:
 #VALIDATION
 #------------------------------
 #make prediction for custom image out of test set
-img = image.load_img("C:/Users/User/Documents/GitHub/FYP_Emotion_Detection/Project2/dataset/jackman.png", grayscale=True, target_size=(48, 48))
+img = image.load_img("C:/Users/User/Documents/GitHub/FYP_Emotion_Detection/Project2/dataset/pablo.png", grayscale=True, target_size=(48, 48))
 
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis = 0)
